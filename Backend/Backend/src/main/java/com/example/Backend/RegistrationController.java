@@ -5,20 +5,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+@CrossOrigin
 @RestController
 public class RegistrationController {
+	
 
     private static final String JsonFile = "users.json";
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Registration registration) {
+    public ResponseEntity<?> registerUser(@RequestBody Registration registration) {
         try {
             // Validate that required fields are not blank
             if (isNullOrEmpty(registration.getUsername()) || isNullOrEmpty(registration.getEmail()) || isNullOrEmpty(registration.getPassword())) {
@@ -38,7 +41,7 @@ public class RegistrationController {
             users.add(registration);
             writeUsersToJson(users);
 
-            return ResponseEntity.ok("Registration successful");
+            return ResponseEntity.ok(newUserId);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error registering user");
@@ -72,17 +75,17 @@ public class RegistrationController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Registration loginRequest) {
-        if (isNullOrEmpty(loginRequest.getUsername()) || isNullOrEmpty(loginRequest.getPassword())) {
+        if (isNullOrEmpty(loginRequest.getEmail()) || isNullOrEmpty(loginRequest.getPassword())) {
             return ResponseEntity.status(400).body("Username and password are required for login.");
         }
 
         try {
             List<Registration> users = readUsersFromJson();
             for (Registration user : users) {
-                if (user.getUsername().equals(loginRequest.getUsername()) &&
+                if (user.getEmail().equals(loginRequest.getEmail()) &&
                     user.getPassword().equals(loginRequest.getPassword())) {
                     // Return user data if data match
-                    return ResponseEntity.ok(user);
+                    return ResponseEntity.ok(user.getId());
                 }
             }
             return ResponseEntity.status(401).body("Invalid email or password");
