@@ -1,13 +1,23 @@
 package com.example.Backend;
 
+import java.util.List;
+
 public class Registration {
     private Long id;
     private String username;
     private String email;
     private String password;
+    private List<Email> emails;
     public Registration(){
     	
     }
+	public List<Email> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
+	}
 	public Registration(Long id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
