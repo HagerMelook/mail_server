@@ -4,7 +4,7 @@
 "username":"rr",
 "email":"rrana@example.com",
 "password":"rana123",
-"emails":[
+"inbox":[
 {
 "sender":"rana@example.com",
 "receiver":"hager",
