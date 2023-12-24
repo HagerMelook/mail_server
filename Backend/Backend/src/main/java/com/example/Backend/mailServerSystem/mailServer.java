@@ -76,5 +76,29 @@ public class mailServer implements mailServerButtons {
         return null;
     }
 
+    public String getSentMails() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray draftMails = (JSONArray) obj.get("sent");
+                return draftMails.toJSONString();
+            }
+        }
+        return null;
+    }
+
+    public String getContacts() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray draftMails = (JSONArray) obj.get("contacts");
+                return draftMails.toJSONString();
+            }
+        }
+        return null;
+    }
+
 
 }
