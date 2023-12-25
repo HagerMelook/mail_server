@@ -7,17 +7,31 @@ public class Registration {
     private String username;
     private String email;
     private String password;
-    private List<Email> emails;
+    private List<Email> inbox;
+    private List<Email> draft;
+    private List<Email> sent;
+    private List<Email> trash;
+    private List<Registration> contacts;
     public Registration(){
     	
     }
-	public List<Email> getEmails() {
-		return emails;
+
+    public List<Email> getEmails(String emailType) {
+    	switch(emailType)
+    	{
+    	case "inbox":
+    		return inbox;
+		case "draft":
+    		return draft;
+		case "sent":
+    		return sent;
+		case"trash":
+    		return trash;
+		default:
+    			return null;
+    	}
 	}
 
-	public void setEmails(List<Email> emails) {
-		this.emails = emails;
-	}
 	public Registration(Long id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
@@ -47,6 +61,56 @@ public class Registration {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public List<Email> getInbox() {
+		return inbox;
+	}
+
+
+	public void setInbox(List<Email> inbox) {
+		this.inbox = inbox;
+	}
+
+
+	public List<Email> getDraft() {
+		return draft;
+	}
+
+
+	public void setDraft(List<Email> draft) {
+		this.draft = draft;
+	}
+
+
+	public List<Email> getSent() {
+		return sent;
+	}
+
+
+	public void setSent(List<Email> sent) {
+		this.sent = sent;
+	}
+
+
+	public List<Email> getTrash() {
+		return trash;
+	}
+
+
+	public void setTrash(List<Email> trash) {
+		this.trash = trash;
+	}
+
+
+	public List<Registration> getContacts() {
+		return contacts;
+	}
+
+
+	public void setContacts(List<Registration> contacts) {
+		this.contacts = contacts;
 	}
 
 
