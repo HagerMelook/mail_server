@@ -1,108 +1,168 @@
 [
-{
-"id":1,
-"username":"rr",
-"email":"rrana@example.com",
-"password":"rana123",
-"inbox":[
-{
-"sender":"rana@example.com",
-"receiver":"hager",
-"date":"2023-01-01",
-"importance":"high",
-"subject":"report_update",
-"attachment":true,
-"attachments":[{
-"fileName":"report",
-"fileSize":200
-}
-]
-},
-{
-"sender":"omnia@example.com",
-"receiver":"rana",
-"date":"2023-01-02",
-"importance":"medium",
-"subject":"meeting",
-"attachment":false,
-"attachments":[
-]
-},
-{
-"sender":"nouran@example.com",
-"receiver":"rana",
-"date":"2023-01-10",
-"importance":"high",
-"subject":"oop_report",
-"attachment":true,
-"attachments":[{
-"fileName":"report2",
-"fileSize":500
-}
-]
-},
-{
-"sender":"rana@example.com",
-"receiver":"hager",
-"date":"2023-01-01",
-"importance":"low",
-"subject":"update",
-"attachment":true,
-"attachments":[
-]
-}
-]
-},
-{
-"id":2,
-"username":"rr",
-"email":"rranfffa@example.com",
-"password":"rancccccvva123",
-"emails":[
-]
-},
-{
-"id":3,
-"username":"rr",
-"email":"rranfffffffa@example.com",
-"password":"djdjdj",
-"emails":[
-]
-},
-{
-"id":4,
-"username":"rffddfdfdfdfdfdfr",
-"email":"dkdhfdh@gksdk.com",
-"password":"rana123",
-"emails":[
-]
-},
-{
-"id":5,
-"username":"rana",
-"email":"adkfh",
-"password":"dddd",
-"emails":null
-},
-{
-"id":6,
-"username":"rffdgggdfdfdfdfdfdfr",
-"email":"dkdhfdh@gksdk.com",
-"password":"rana123",
-"emails":null
-},
-{
-"id":7,
-"username":"rffdgggudfdfdfdfdfdfr",
-"email":"dkdhfdggh@gksdk.com",
-"password":"rana123",
-"emails":null
-},
-{
-"id":8,
-"username":"rffdgggudfdfdfdfdfdfr",
-"email":"dkdhdddfdggh@gksdk.com",
-"password":"rana123",
-"emails":null
-}
+    {
+        "id": 1,
+        "username": "rr",
+        "email": "rrana@example.com",
+        "password": "rana123",
+        "inbox": [
+            {
+                "id": 1,
+                "sender": "rrana@example.com",
+                "receiver": "hager",
+                "date": "2023-01-01",
+                "importance": "high",
+                "subject": "report_update",
+                "attachment": true,
+                "attachments": [
+                    {
+                        "fileName": "report",
+                        "fileSize": 200
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "sender": "omnia@example.com",
+                "receiver": "rana",
+                "date": "2023-01-02",
+                "importance": "medium",
+                "subject": "meeting",
+                "attachment": false,
+                "attachments": []
+            }
+        ],
+        "trash": [
+            {
+                "id": 1,
+                "sender": "rana@example.com",
+                "receiver": "hager",
+                "date": "2023-01-01",
+                "importance": "low",
+                "subject": "update",
+                "attachment": true,
+                "attachments": []
+            },
+            {
+                "id": 2,
+                "sender": "nouran@example.com",
+                "receiver": "rana",
+                "date": "2023-01-10",
+                "importance": "high",
+                "subject": "oop_report",
+                "attachment": true,
+                "attachments": [
+                    {
+                        "fileName": "report2",
+                        "fileSize": 500
+                    }
+                ]
+            }
+        ],
+        "draft": [
+            {
+                "id": 1,
+                "sender": "rana@example.com",
+                "receiver": "nour",
+                "date": "2023-01-01",
+                "importance": "high",
+                "subject": "report_update",
+                "attachment": true,
+                "attachments": [
+                    {
+                        "fileName": "report",
+                        "fileSize": 200
+                    }
+                ]
+            }
+        ],
+        "userFolders": [],
+        "sent": [
+            {
+                "id": 1,
+                "sender": "csed@example.com",
+                "receiver": "student",
+                "date": "2023-01-01",
+                "importance": "high",
+                "subject": "report_update",
+                "attachment": true,
+                "attachments": [
+                    {
+                        "fileName": "report",
+                        "fileSize": 200
+                    }
+                ]
+            }
+        ],
+        "contacts": [
+            {
+                "id": 1,
+                "name": "nouran",
+                "email": "nouran2026@exmaple.com"
+            },
+            {
+                "id": 2,
+                "name": "rana",
+                "email": "rana2026@exmaple.com"
+            },
+            {
+                "id": 3,
+                "name": "hager",
+                "email": "hager2026@exmaple.com"
+            },
+            {
+                "id": 4,
+                "name": "omnia",
+                "email": "omnia2026@exmaple.com"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "username": "rr",
+        "email": "rranfffa@example.com",
+        "password": "rancccccvva123",
+        "emails": []
+    },
+    {
+        "id": 3,
+        "username": "rr",
+        "email": "rranfffffffa@example.com",
+        "password": "djdjdj",
+        "emails": []
+    },
+    {
+        "id": 4,
+        "username": "rffddfdfdfdfdfdfr",
+        "email": "dkdhfdh@gksdk.com",
+        "password": "rana123",
+        "emails": []
+    },
+    {
+        "id": 5,
+        "username": "rana",
+        "email": "adkfh",
+        "password": "dddd",
+        "emails": null
+    },
+    {
+        "id": 6,
+        "username": "rffdgggdfdfdfdfdfdfr",
+        "email": "dkdhfdh@gksdk.com",
+        "password": "rana123",
+        "emails": null
+    },
+    {
+        "id": 7,
+        "username": "rffdgggudfdfdfdfdfdfr",
+        "email": "dkdhfdggh@gksdk.com",
+        "password": "rana123",
+        "emails": null
+    },
+    {
+        "id": 8,
+        "username": "rffdgggudfdfdfdfdfdfr",
+        "email": "dkdhdddfdggh@gksdk.com",
+        "password": "rana123",
+        "emails": null
+    }
 ]
