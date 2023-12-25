@@ -1,4 +1,4 @@
-package com.example.Backend.mailServerSystem;
+package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
 
 
@@ -10,7 +10,7 @@ public class contact implements command{
     }
 
     public String execute(){
-        return contacts.getContacts();
+        return contacts.getData("contacts");
     }
 
 }

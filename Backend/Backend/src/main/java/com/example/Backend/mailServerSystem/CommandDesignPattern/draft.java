@@ -1,4 +1,4 @@
-package com.example.Backend.mailServerSystem;
+package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
 
 
@@ -10,7 +10,7 @@ public class draft implements command{
     }
 
     public String execute(){
-        return draft.getDraftMails();
+        return draft.getData("draft");
     }
 
 }

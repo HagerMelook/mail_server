@@ -1,4 +1,4 @@
-package com.example.Backend.mailServerSystem;
+package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
 
 public class inbox implements command{
@@ -10,6 +10,6 @@ public class inbox implements command{
     }
 
     public String execute() {
-        return inbox.getInboxMails();
+        return inbox.getData("inbox");
     }
 }

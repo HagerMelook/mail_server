@@ -1,4 +1,4 @@
-package com.example.Backend.mailServerSystem;
+package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
 
 public class trash implements command {
@@ -10,7 +10,7 @@ public class trash implements command {
     }
 
     public String execute() {
-        return trash.getTrashMails();
+        return trash.getData("trash");
     }
 
 }

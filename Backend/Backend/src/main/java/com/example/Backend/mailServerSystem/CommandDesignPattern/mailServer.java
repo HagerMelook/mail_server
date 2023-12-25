@@ -1,4 +1,4 @@
-package com.example.Backend.mailServerSystem;
+package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,7 +12,15 @@ public class mailServer implements mailServerButtons {
 
     private JSONArray usersArray;
     private Long userId;
+    private Long mailId;
+    private String folderName;
     
+    public mailServer(Long mailId, String folderName, Long userId) {
+        this.mailId = mailId;
+        this.folderName = folderName;
+        this.userId = userId;
+    }
+
     public mailServer(Long userId) {
         this.userId = userId;
     }
@@ -40,65 +48,32 @@ public class mailServer implements mailServerButtons {
         }
     }
 
-    public String getInboxMails() {
+    public String getData(String folderName) {
         setUsersArray();
         for (int i = 0; i < usersArray.size(); i++) {
             JSONObject obj = (JSONObject) usersArray.get(i);
             if (obj.get("id").equals(userId)) {
-                JSONArray inboxMails = (JSONArray) obj.get("inbox");
-                return inboxMails.toJSONString();
+                JSONArray Mails = (JSONArray) obj.get(folderName);
+                return Mails.toJSONString();
             }
         }
         return null;
     }
 
-    public String getTrashMails() {
+    public String getMail() {
         setUsersArray();
         for (int i = 0; i < usersArray.size(); i++) {
             JSONObject obj = (JSONObject) usersArray.get(i);
             if (obj.get("id").equals(userId)) {
-                JSONArray trashMails = (JSONArray) obj.get("trash");
-                return trashMails.toJSONString();
+                JSONArray Mails = (JSONArray) obj.get(folderName);
+                for(int j = 0; j < Mails.size(); j++){
+                    JSONObject theMail = (JSONObject) Mails.get(j);
+                    if(theMail.get("id").equals(mailId))
+                        return theMail.toJSONString();
+                }
             }
         }
         return null;
     }
-
-    public String getDraftMails() {
-        setUsersArray();
-        for (int i = 0; i < usersArray.size(); i++) {
-            JSONObject obj = (JSONObject) usersArray.get(i);
-            if (obj.get("id").equals(userId)) {
-                JSONArray draftMails = (JSONArray) obj.get("draft");
-                return draftMails.toJSONString();
-            }
-        }
-        return null;
-    }
-
-    public String getSentMails() {
-        setUsersArray();
-        for (int i = 0; i < usersArray.size(); i++) {
-            JSONObject obj = (JSONObject) usersArray.get(i);
-            if (obj.get("id").equals(userId)) {
-                JSONArray draftMails = (JSONArray) obj.get("sent");
-                return draftMails.toJSONString();
-            }
-        }
-        return null;
-    }
-
-    public String getContacts() {
-        setUsersArray();
-        for (int i = 0; i < usersArray.size(); i++) {
-            JSONObject obj = (JSONObject) usersArray.get(i);
-            if (obj.get("id").equals(userId)) {
-                JSONArray draftMails = (JSONArray) obj.get("contacts");
-                return draftMails.toJSONString();
-            }
-        }
-        return null;
-    }
-
 
 }

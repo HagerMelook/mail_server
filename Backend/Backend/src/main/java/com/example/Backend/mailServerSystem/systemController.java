@@ -8,7 +8,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.inbox;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.mailButton;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.mailServerButtons;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,27 +56,7 @@ public class systemController {
         return onPressed.press();
     }
 
-    @GetMapping("{username}/userFolders")
-    public JSONObject userFolders(@PathVariable("username") String username) {
-        return userFolders(username);
-    }
-
-    @GetMapping("{username}/attachment")
-    public JSONObject viewAttachment(@PathVariable("username") String username) {
-        return null;
-    }
-    
-    @PostMapping("{username}/attachment/save")
-    public void addAttachment(@PathVariable("username") String username) {
-        
-    }
-    
-    @DeleteMapping("{username}/attachment/delete")
-    public void deleteAttachment(){
-
-    }
-    
-    @GetMapping("{id}/contacts")
+     @GetMapping("{id}/contacts")
     public String contacts(@PathVariable("id") Long userId) {
         mailServerButtons mail = userMail.getButton(userId);
         contact getContact = new contact(mail);
@@ -77,16 +64,44 @@ public class systemController {
         return onPressed.press();
     }
 
-    
-    @PostMapping("{username}/contacts/save")
-    public void addContact(@PathVariable("username") String username) {
-        
+    @GetMapping("{idU}/{folderName}/{idD}")
+    public String mail(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName ,@PathVariable("idD") Long dataId) {
+        mailServerButtons mail = userMail.getMail(dataId, folderName, userId);
+        getTheMail theMail = new getTheMail(mail);
+        mailButton onPressed = new mailButton(theMail);
+        return onPressed.press();
     }
+
+    // @GetMapping("{username}/userFolders")
+    // public JSONObject userFolders(@PathVariable("username") String username) {
+    //     return userFolders(username);
+    // }
+
+    // @GetMapping("{username}/attachment")
+    // public JSONObject viewAttachment(@PathVariable("username") String username) {
+    //     return null;
+    // }
     
-    @DeleteMapping("{username}/contacts/delete")
-    public void deleteContact(){
+    // @PostMapping("{username}/attachment/save")
+    // public void addAttachment(@PathVariable("username") String username) {
         
-    }
+    // }
+    
+    // @DeleteMapping("{username}/attachment/delete")
+    // public void deleteAttachment(){
+
+    // }
+
+    
+    // @PostMapping("{username}/contacts/save")
+    // public void addContact(@PathVariable("username") String username) {
+        
+    // }
+    
+    // @DeleteMapping("{username}/contacts/delete")
+    // public void deleteContact(){
+        
+    // }
 
 
     // @PostMapping("{username}/save/user")

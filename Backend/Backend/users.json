@@ -121,7 +121,7 @@
         "username": "rr",
         "email": "rranfffa@example.com",
         "password": "rancccccvva123",
-        "emails": []
+        "inbox": [{"id":11}]
     },
     {
         "id": 3,
