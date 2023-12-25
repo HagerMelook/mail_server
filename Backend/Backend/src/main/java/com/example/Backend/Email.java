@@ -3,7 +3,7 @@ package com.example.Backend;
 import java.util.ArrayList;
 import java.util.List;
 
-class Email {
+class Email{
     private String sender;
     private String receiver;
     private String date;

@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.getFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.inbox;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.mailButton;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.mailInUserFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.mailServerButtons;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.userFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,8 +61,8 @@ public class systemController {
 
      @GetMapping("{id}/contacts")
     public String contacts(@PathVariable("id") Long userId) {
-        mailServerButtons mail = userMail.getButton(userId);
-        contact getContact = new contact(mail);
+        mailServerButtons contact = userMail.getButton(userId);
+        contact getContact = new contact(contact);
         mailButton onPressed = new mailButton(getContact);
         return onPressed.press();
     }
@@ -71,6 +74,31 @@ public class systemController {
         mailButton onPressed = new mailButton(theMail);
         return onPressed.press();
     }
+
+    @GetMapping("{idU}/userFolders/{folderName}")
+    public String Folder(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName) {
+        mailServerButtons folder = userMail.userFolders(userId, folderName);
+        getFolder theFolder= new getFolder(folder);
+        mailButton onPressed = new mailButton(theFolder);
+        return onPressed.press();
+    }
+    
+    @GetMapping("{idU}/userFolders/{folderName}/{emailId}")
+    public String EmaiInFolder(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName, @PathVariable("emailId") Long idE) {
+        mailServerButtons folder = userMail.getMail(idE, folderName, userId);
+        mailInUserFolder theMail= new mailInUserFolder(folder);
+        mailButton onPressed = new mailButton(theMail);
+        return onPressed.press();
+    }
+
+    @PostMapping("{idU}/userFolders/create/{folderName}")
+    public void addAttachment(@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
+        mailServerButtons mail = userMail.userFolders(idU, folderName);
+        userFolders createFolder = new userFolders(mail);
+        mailButton onPressed = new mailButton(createFolder);
+        onPressed.press();
+    }
+
 
     // @GetMapping("{username}/userFolders")
     // public JSONObject userFolders(@PathVariable("username") String username) {
