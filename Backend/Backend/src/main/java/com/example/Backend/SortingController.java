@@ -28,13 +28,14 @@ public class SortingController {
             Registration user = findUserById(users, request.getUserId());
 
             if (user != null) {
-            	List<Email> userEmails = user.getEmails();
+  
+            	List<Email> userEmails = user.getEmails(request.getEmailType());
                 // Determine the sorting strategy based on the request
                 SortingStrategy strategy = getSortingStrategy(request.getSortingKeyword());
 
                 // Use the Context class with the specified strategy
                 EmailSorterContext sorterContext = new EmailSorterContext(strategy);
-                sorterContext.sortEmails(user.getEmails());
+                sorterContext.sortEmails(user.getEmails(request.getEmailType()));
 
 
                 return ResponseEntity.ok(userEmails);
@@ -76,7 +77,5 @@ public class SortingController {
     }
 
 }
-
-
 
 
