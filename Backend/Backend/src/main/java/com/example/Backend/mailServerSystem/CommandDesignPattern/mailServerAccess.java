@@ -12,25 +12,28 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class mailServer implements mailServerButtons {
+public class mailServerAccess implements mailServerButtons {
 
     private JSONArray usersArray;
     private Long userId;
     private Long mailId;
     private String folderName;
 
-    public mailServer(Long mailId, String folderName, Long userId) {
+    public mailServerAccess() {
+    }
+
+    public mailServerAccess(Long mailId, String folderName, Long userId) {
         this.mailId = mailId;
         this.folderName = folderName;
         this.userId = userId;
     }
 
-    public mailServer(Long userId, String folderName) {
+    public mailServerAccess(Long userId, String folderName) {
         this.userId = userId;
         this.folderName = folderName;
     }
 
-    public mailServer(Long userId) {
+    public mailServerAccess(Long userId) {
         this.userId = userId;
     }
 
@@ -38,7 +41,22 @@ public class mailServer implements mailServerButtons {
         usersArray = readJSONSystem();
     }
 
-    private JSONArray readJSONSystem() {
+    public void addJSONEamilToUser(JSONObject email, Long userId, String userFolder) {
+        JSONArray array = readJSONSystem();
+        for(int i = 0; i < array.size(); i++){
+            JSONObject obj = (JSONObject)array.get(i);
+            if(obj.get("id").equals(userId)){
+                JSONArray folder = (JSONArray)obj.get(userFolder);
+                email.put("id", folder.size() + 1);
+                folder.add(email);
+                //obj.put(folderName, folder);
+                break;
+            }
+        }
+       updateJSON(array);
+    }
+
+    public JSONArray readJSONSystem() {
         File file = new File(
                 "C:\\Users\\noura\\OneDrive\\Desktop\\mailServer\\mail_server\\Backend\\Backend\\users.json");
         JSONParser jp = new JSONParser();
@@ -58,7 +76,7 @@ public class mailServer implements mailServerButtons {
         }
     }
 
-    private void updateJSON(JSONArray obj) {
+    public void updateJSON(JSONArray obj) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(
                 "C:\\Users\\noura\\OneDrive\\Desktop\\mailServer\\mail_server\\Backend\\Backend\\users.json"))) {
             bw.write(obj.toJSONString());

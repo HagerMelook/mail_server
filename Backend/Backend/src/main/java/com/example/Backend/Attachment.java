@@ -15,6 +15,5 @@ public class Attachment {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
-    
 
 }

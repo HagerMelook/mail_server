@@ -3,7 +3,7 @@ package com.example.Backend;
 import java.util.ArrayList;
 import java.util.List;
 
-class Email{
+public class Email{
     private String sender;
     private String receiver;
     private String date;
@@ -11,6 +11,15 @@ class Email{
     private String subject;
     private boolean attachment;
     private List<Attachment> attachments;
+	private String text;
+	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+
 	public String getSender() {
 		return sender;
 	}

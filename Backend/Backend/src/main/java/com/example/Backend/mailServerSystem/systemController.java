@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Backend.Email;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
@@ -19,6 +20,7 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
+import com.example.Backend.mailServerSystem.FacadeDesignPattern.MailCreatorFacade;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +61,7 @@ public class systemController {
         return onPressed.press();
     }
 
-     @GetMapping("{id}/contacts")
+    @GetMapping("{id}/contacts")
     public String contacts(@PathVariable("id") Long userId) {
         mailServerButtons contact = userMail.getButton(userId);
         contact getContact = new contact(contact);
@@ -68,7 +70,8 @@ public class systemController {
     }
 
     @GetMapping("{idU}/{folderName}/{idD}")
-    public String mail(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName ,@PathVariable("idD") Long dataId) {
+    public String mail(@PathVariable("idU") Long userId, @PathVariable("folderName") String folderName,
+            @PathVariable("idD") Long dataId) {
         mailServerButtons mail = userMail.getMail(dataId, folderName, userId);
         getTheMail theMail = new getTheMail(mail);
         mailButton onPressed = new mailButton(theMail);
@@ -76,17 +79,18 @@ public class systemController {
     }
 
     @GetMapping("{idU}/userFolders/{folderName}")
-    public String Folder(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName) {
+    public String Folder(@PathVariable("idU") Long userId, @PathVariable("folderName") String folderName) {
         mailServerButtons folder = userMail.userFolders(userId, folderName);
-        getFolder theFolder= new getFolder(folder);
+        getFolder theFolder = new getFolder(folder);
         mailButton onPressed = new mailButton(theFolder);
         return onPressed.press();
     }
-    
+
     @GetMapping("{idU}/userFolders/{folderName}/{emailId}")
-    public String EmaiInFolder(@PathVariable("idU") Long userId, @PathVariable("folderName")String  folderName, @PathVariable("emailId") Long idE) {
+    public String EmaiInFolder(@PathVariable("idU") Long userId, @PathVariable("folderName") String folderName,
+            @PathVariable("emailId") Long idE) {
         mailServerButtons folder = userMail.getMail(idE, folderName, userId);
-        mailInUserFolder theMail= new mailInUserFolder(folder);
+        mailInUserFolder theMail = new mailInUserFolder(folder);
         mailButton onPressed = new mailButton(theMail);
         return onPressed.press();
     }
@@ -99,53 +103,63 @@ public class systemController {
         onPressed.press();
     }
 
+    @PostMapping("{idU}/createEmail/save")
+    public void createEamil(@RequestBody Email email, @PathVariable("idU") Long idU) {
+        MailCreatorFacade mail = new MailCreatorFacade(email, idU, "draft");
+        mail.create();
+    }
+
+    @PostMapping("{idU}/createEmail/send")
+    public void sendEamil(@RequestBody Email email, @PathVariable("idU") Long idU) {
+        MailCreatorFacade mail = new MailCreatorFacade(email, idU, "sent");
+        mail.create();
+    }
 
     // @GetMapping("{username}/userFolders")
     // public JSONObject userFolders(@PathVariable("username") String username) {
-    //     return userFolders(username);
+    // return userFolders(username);
     // }
 
     // @GetMapping("{username}/attachment")
     // public JSONObject viewAttachment(@PathVariable("username") String username) {
-    //     return null;
+    // return null;
     // }
-    
+
     // @PostMapping("{username}/attachment/save")
     // public void addAttachment(@PathVariable("username") String username) {
-        
+
     // }
-    
+
     // @DeleteMapping("{username}/attachment/delete")
     // public void deleteAttachment(){
 
     // }
 
-    
     // @PostMapping("{username}/contacts/save")
     // public void addContact(@PathVariable("username") String username) {
-        
+
     // }
-    
+
     // @DeleteMapping("{username}/contacts/delete")
     // public void deleteContact(){
-        
+
     // }
 
-
     // @PostMapping("{username}/save/user")
-    // public void saveJSONUser(@RequestBody user user, @PathVariable("username") String username) {
-    //     try {
-    //         json.createJSONSystem(json.createJSONUser(user));
-    //     } catch (ParseException e) {
-    //         e.printStackTrace();
-    //     }
+    // public void saveJSONUser(@RequestBody user user, @PathVariable("username")
+    // String username) {
+    // try {
+    // json.createJSONSystem(json.createJSONUser(user));
+    // } catch (ParseException e) {
+    // e.printStackTrace();
+    // }
     // }
 
     // @PostMapping("{username}/save/email")
-    // public void saveJSONUser(@RequestBody Email email, @PathVariable("username") String username) {
-    //     JSONObject obj = json.createJSONEamil(email);
-    //     json.addJSONEamilToUser(obj, username);
+    // public void saveJSONUser(@RequestBody Email email, @PathVariable("username")
+    // String username) {
+    // JSONObject obj = json.createJSONEamil(email);
+    // json.addJSONEamilToUser(obj, username);
     // }
-
 
 }
