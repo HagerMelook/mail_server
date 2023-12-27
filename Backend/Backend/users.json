@@ -1,207 +1,38 @@
 [
-    {
-        "password": "rana123",
-        "userFolders": [
-            {
-                "newfolder": []
-            },
-            {
-                "csed2026": []
-            },
-            {
-                "test": [{
-                    "date": "2011-1-11",
-                    "attachments": [
-                        {
-                            "fileName": "report",
-                            "fileSize": 200
-                        }
-                    ],
-                    "receiver": "nour",
-                    "attachment": true,
-                    "sender": "rana@example.com",
-                    "importance": "high",
-                    "subject": "report_update",
-                    "id": 1
-                }]
-            }
-        ],
-        "draft": [
-            {
-                "date": "2023-01-01",
-                "attachments": [
-                    {
-                        "fileName": "report",
-                        "fileSize": 200
-                    }
-                ],
-                "receiver": "nour",
-                "attachment": true,
-                "sender": "rana@example.com",
-                "importance": "high",
-                "subject": "report_update",
-                "id": 1
-            },
-            {
-                "date": "2023-01-01",
-                "receiver": "you",
-                "sender": "me@example.com",
-                "importance": "high",
-                "subject": "test",
-                "text": "test mail creation.:D",
-                "id": 2
-            }
-        ],
-        "id": 1,
-        "inbox": [
-            {
-                "date": "2023-01-01",
-                "attachments": [
-                    {
-                        "fileName": "report",
-                        "fileSize": 200
-                    }
-                ],
-                "receiver": "student",
-                "attachment": true,
-                "sender": "csed@example.com",
-                "importance": "high",
-                "subject": "report_update",
-                "id": 1
-            }
-        ],
-        "sent": [
-            {
-                "date": "2023-01-01",
-                "attachments": [
-                    {
-                        "fileName": "report",
-                        "fileSize": 200
-                    }
-                ],
-                "receiver": "student",
-                "attachment": true,
-                "sender": "csed@example.com",
-                "importance": "high",
-                "subject": "report_update",
-                "id": 1
-            }
-        ],
-        "email": "rrana@example.com",
-        "contacts": [
-            {
-                "name": "rana",
-                "id": 1,
-                "email": "rana2026@exmaple.com"
-            },
-            {
-                "name": "hager",
-                "id": 2,
-                "email": "hager2026@exmaple.com"
-            },
-            {
-                "name": "omnia",
-                "id": 3,
-                "email": "omnia2026@exmaple.com"
-            },
-            {
-                "name": "nouran",
-                "id": 4,
-                "email": "nouran2026@exmaple.com"
-            }
-        ],
-        "username": "rr",
-        "trash": [
-            {
-                "date": "2023-01-01",
-                "attachments": [],
-                "receiver": "hager",
-                "attachment": true,
-                "sender": "rana@example.com",
-                "importance": "low",
-                "subject": "update",
-                "id": 1
-            },
-            {
-                "date": "2023-01-10",
-                "attachments": [
-                    {
-                        "fileName": "report2",
-                        "fileSize": 500
-                    }
-                ],
-                "receiver": "rana",
-                "attachment": true,
-                "sender": "nouran@example.com",
-                "importance": "high",
-                "subject": "oop_report",
-                "id": 2
-            }
-        ]
-    },
-    {
-        "password": "rancccccvva123",
-        "draft": [
-            {
-                "date": "2003-4-19",
-                "receiver": "rrana@example.com",
-                "sender": "rranfffa@example.com",
-                "importance": "high",
-                "subject": "hbd",
-                "text": "happy birth day bro. :')",
-                "id": 1
-            }
-        ],
-        "id": 2,
-        "inbox": [
-            {
-                "id": 11
-            }
-        ],
-        "sent": [],
-        "email": "rranfffa@example.com",
-        "username": "rr"
-    },
-    {
-        "emails": [],
-        "password": "djdjdj",
-        "id": 3,
-        "email": "rranfffffffa@example.com",
-        "username": "rr"
-    },
-    {
-        "emails": [],
-        "password": "rana123",
-        "id": 4,
-        "email": "dkdhfdh@gksdk.com",
-        "username": "rffddfdfdfdfdfdfr"
-    },
-    {
-        "emails": null,
-        "password": "dddd",
-        "id": 5,
-        "email": "adkfh",
-        "username": "rana"
-    },
-    {
-        "emails": null,
-        "password": "rana123",
-        "id": 6,
-        "email": "dkdhfdh@gksdk.com",
-        "username": "rffdgggdfdfdfdfdfdfr"
-    },
-    {
-        "emails": null,
-        "password": "rana123",
-        "id": 7,
-        "email": "dkdhfdggh@gksdk.com",
-        "username": "rffdgggudfdfdfdfdfdfr"
-    },
-    {
-        "emails": null,
-        "password": "rana123",
-        "id": 8,
-        "email": "dkdhdddfdggh@gksdk.com",
-        "username": "rffdgggudfdfdfdfdfdfr"
-    }
+{
+"id":1,
+"username":"user1",
+"email":"user1@example.com",
+"password":"password1",
+"inbox":[],
+"draft":[],
+"sent":[],
+"trash":[],
+"contacts":[],
+"userFolders":[]
+},
+{
+"id":2,
+"username":"user2",
+"email":"user2@example.com",
+"password":"password2",
+"inbox":[],
+"draft":[],
+"sent":[],
+"trash":[],
+"contacts":[],
+"userFolders":[]
+},
+{
+"id":3,
+"username":"user3",
+"email":"user3@example.com",
+"password":"password3",
+"inbox":[],
+"draft":[],
+"sent":[],
+"trash":[],
+"contacts":[],
+"userFolders":[]
+}
 ]
