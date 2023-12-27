@@ -123,16 +123,13 @@ public class mailServerAccess implements mailServerButtons {
         return null;
     }
 
-    public void createFolder() {
+    public void createFolder(JSONObject folder) {
         setUsersArray();
         for (int i = 0; i < usersArray.size(); i++) {
             JSONObject obj = (JSONObject) usersArray.get(i);
             if (obj.get("id").equals(userId)) {
                 JSONArray userFolders = (JSONArray) obj.get("userFolders");
-                JSONArray arr = new JSONArray();
-                JSONObject tmp = new JSONObject();
-                tmp.put(folderName, arr);
-                userFolders.add(tmp);
+                userFolders.add(folder);
                 updateJSON(usersArray);
                 break;
             }
@@ -147,8 +144,8 @@ public class mailServerAccess implements mailServerButtons {
                 JSONArray folders = (JSONArray) obj.get("userFolders");
                 for (int k = 0; k < folders.size(); k++) {
                     JSONObject obj2 = (JSONObject) folders.get(k);
-                    if (obj2.get(folderName) != null) {
-                        return obj2.get(folderName).toString();
+                    if (obj2.get("name").equals(folderName)) {
+                        return obj2.get("emails").toString();
                     }
                 }
             }

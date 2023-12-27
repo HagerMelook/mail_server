@@ -1,37 +1,86 @@
-[{
-    "id":1,
-    "username":"user1",
-    "email":"user1@example.com",
-    "password":"password1",
-    "inbox":[],
-    "draft":[],
-    "sent":[],
-    "trash":[],
-    "contacts":[],
-    "userFolders":[]
+[
+    {
+        "password": "password1",
+        "userFolders": [
+            {
+                "emails": [ {
+                    "date": "2020-12-20",
+                    "receiver": "user2@example.com",
+                    "sender": "user1@example.com",
+                    "importance": "high",
+                    "subject": "test",
+                    "text": "we are testing :)",
+                    "id": 1
+                }],
+                "name": "test"
+            },
+            {
+                "emails": [],
+                "name": "csed2026"
+            }
+        ],
+        "draft": [],
+        "id": 1,
+        "inbox": [],
+        "sent": [
+            {
+                "date": "2020-12-20",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "we are testing :)",
+                "id": 1
+            }
+        ],
+        "email": "user1@example.com",
+        "contacts": [],
+        "username": "user1",
+        "trash": [
+            {
+                "date": "2020-12-20",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "deletionDate": "2024-01-26",
+                "importance": "high",
+                "subject": "test",
+                "text": "we are testing :)",
+                "id": 1
+            }
+        ]
     },
     {
-    "id":2,
-    "username":"user2",
-    "email":"user2@example.com",
-    "password":"password2",
-    "inbox":[],
-    "draft":[],
-    "sent":[],
-    "trash":[],
-    "contacts":[],
-    "userFolders":[]
+        "password": "password2",
+        "userFolders": [],
+        "draft": [],
+        "id": 2,
+        "inbox": [
+            {
+                "date": "2020-12-20",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "we are testing :)",
+                "id": 1
+            }
+        ],
+        "sent": [],
+        "email": "user2@example.com",
+        "contacts": [],
+        "username": "user2",
+        "trash": []
     },
     {
-    "id":3,
-    "username":"user3",
-    "email":"user3@example.com",
-    "password":"password3",
-    "inbox":[],
-    "draft":[],
-    "sent":[],
-    "trash":[],
-    "contacts":[],
-    "userFolders":[]
+        "password": "password3",
+        "userFolders": [],
+        "draft": [],
+        "id": 3,
+        "inbox": [],
+        "sent": [],
+        "email": "user3@example.com",
+        "contacts": [],
+        "username": "user3",
+        "trash": []
     }
-    ]
+]

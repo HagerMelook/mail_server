@@ -19,11 +19,11 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.mailInUserFolde
 import com.example.Backend.mailServerSystem.CommandDesignPattern.mailServerButtons;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
-import com.example.Backend.mailServerSystem.CommandDesignPattern.userFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.Contact;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.ContactCreatorFacade;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.MailCreatorFacade;
+import com.example.Backend.mailServerSystem.FacadeDesignPattern.createUserFolderFacade;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,10 +107,8 @@ public class systemController {
 
     @PostMapping("{idU}/userFolders/create/{folderName}")
     public void addAttachment(@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
-        mailServerButtons mail = userMail.userFolders(idU, folderName);
-        userFolders createFolder = new userFolders(mail);
-        mailButton onPressed = new mailButton(createFolder);
-        onPressed.press();
+        createUserFolderFacade folder = new createUserFolderFacade(idU, folderName);
+        folder.create();
     }
 
     @PostMapping("{idU}/createEmail/save")

@@ -2,13 +2,13 @@ package com.example.Backend;
 
 import org.json.simple.JSONArray;
 
-<<<<<<< HEAD
+
 import org.json.simple.JSONArray;
 
-public class Email{
-=======
-class Email {
->>>>>>> 0f698bffd33e50f743169f1f206e3b974f094dcd
+
+
+public class Email {
+
     private String sender;
     private String receiver;
     private String date;
@@ -16,6 +16,17 @@ class Email {
     private String subject;
     private boolean attachment;
     private JSONArray attachments;
+	private String text;
+
+	public boolean isAttachment() {
+		return attachment;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
 	public String getSender() {
 		return sender;
 	}
