@@ -6,4 +6,7 @@ public interface mailServerButtons {
     public void createFolder();
     public String getUserFolder();
     public String getEmailInUserFolder();
+    public String deleteEmail();
+    public String deleteFolder();
+    public String deleteEmailInFolder();
 }

@@ -1,7 +1,5 @@
 package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
-
-
 public class contact implements command{
     mailServerButtons contacts;
 

@@ -17,12 +17,14 @@ public class MailCreatorFacade {
     MailBody body;
     MailHeader header;
 
-    mailServerAccess access = new mailServerAccess();
+    mailServerAccess access;
 
     public MailCreatorFacade(Email mail, Long userId, String folderName) {
         this.userId = userId;
         this.mail = mail;
         this.folderName = folderName;
+
+        access = new mailServerAccess();
 
         sender = new MailSender(this.mail.getReceiver());
         attachment = new attachment(this.mail.getAttachments(), this.mail.hasAttachments());

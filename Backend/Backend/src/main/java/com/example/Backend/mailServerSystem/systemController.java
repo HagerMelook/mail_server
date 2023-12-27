@@ -1,15 +1,15 @@
 package com.example.Backend.mailServerSystem;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Backend.Email;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteEmailInFolder;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.delete;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.inbox;
@@ -20,11 +20,12 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
+import com.example.Backend.mailServerSystem.FacadeDesignPattern.Contact;
+import com.example.Backend.mailServerSystem.FacadeDesignPattern.ContactCreatorFacade;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.MailCreatorFacade;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class systemController {
@@ -115,6 +116,35 @@ public class systemController {
         mail.create();
     }
 
+    @PostMapping("{id}/contacts/add")
+    public void addContactInfo(@PathVariable("id") Long userId, @RequestBody Contact body) {
+        ContactCreatorFacade contact = new ContactCreatorFacade(userId, body);
+        contact.create();
+    }
+
+    @DeleteMapping("{idU}/{folder}/{idE}/delete")
+    public String deleteMail(@PathVariable("idE") Long idE ,@PathVariable("folder") String folderName, @PathVariable("idU") Long idU) {
+        mailServerButtons delete = userMail.getMail(idE, folderName, idU);
+        delete deleteMail = new delete(delete);
+        mailButton onPressed = new mailButton(deleteMail);
+        return onPressed.press();
+    }
+    @DeleteMapping("{idU}/userFolders/{folderName}/delete")
+    public String deleteFolder(@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
+        mailServerButtons delete = userMail.userFolders(idU, folderName);
+        DeleteFolder deleteFolder = new DeleteFolder(delete);
+        mailButton onPressed = new mailButton(deleteFolder);
+        return onPressed.press();
+    }
+
+    @DeleteMapping("{idU}/userFolders/{folderName}/{emailId}/delete")
+    public String deleteMailInFolder(@PathVariable("emailId") Long idE ,@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
+        mailServerButtons delete = userMail.getMail(idE, folderName, idU);
+        DeleteEmailInFolder deleteMail = new DeleteEmailInFolder(delete);
+        mailButton onPressed = new mailButton(deleteMail);
+        return onPressed.press();
+    }
+    
     // @GetMapping("{username}/userFolders")
     // public JSONObject userFolders(@PathVariable("username") String username) {
     // return userFolders(username);

@@ -42,18 +42,18 @@ public class mailServerAccess implements mailServerButtons {
     }
 
     public void addJSONEamilToUser(JSONObject email, Long userId, String userFolder) {
-        JSONArray array = readJSONSystem();
-        for(int i = 0; i < array.size(); i++){
-            JSONObject obj = (JSONObject)array.get(i);
-            if(obj.get("id").equals(userId)){
-                JSONArray folder = (JSONArray)obj.get(userFolder);
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray folder = (JSONArray) obj.get(userFolder);
                 email.put("id", folder.size() + 1);
                 folder.add(email);
-                //obj.put(folderName, folder);
+                // obj.put(folderName, folder);
                 break;
             }
         }
-       updateJSON(array);
+        updateJSON(usersArray);
     }
 
     public JSONArray readJSONSystem() {
@@ -153,7 +153,7 @@ public class mailServerAccess implements mailServerButtons {
             JSONArray arrEmail = (JSONArray) pa.parse(getUserFolder());
             for (int i = 0; i < arrEmail.size(); i++) {
                 JSONObject obj = (JSONObject) arrEmail.get(i);
-                if (obj.get("id").equals(mailId)){
+                if (obj.get("id").equals(mailId)) {
                     return obj.toJSONString();
                 }
             }
@@ -161,5 +161,82 @@ public class mailServerAccess implements mailServerButtons {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String deleteEmail() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray folder = (JSONArray) obj.get(folderName);
+                for (int k = 0; k < folder.size(); k++) {
+                    JSONObject tmp = (JSONObject) folder.get(k);
+                    if (tmp.get("id").equals(mailId)) {
+                        folder.remove(tmp);
+                        updateIDs(folder);
+                        updateJSON(usersArray);
+                        if (!folderName.equals("trash"))
+                            addJSONEamilToUser(tmp, userId, "trash");
+                        return "Deleted successfully! :D";
+                    }
+                }
+            }
+        }
+        return "not deleted :'(";
+    }
+
+    public String deleteFolder() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray folder = (JSONArray) obj.get("userFolders");
+                for (int k = 0; k < folder.size(); k++) {
+                    JSONObject tmp = (JSONObject) folder.get(k);
+                    if (tmp.get(folderName) != null) {
+                        folder.remove(tmp);
+                        updateJSON(usersArray);
+                        addJSONEamilToUser(tmp, userId, "trash");
+                        return "Deleted successfully! :D";
+                    }
+                }
+            }
+        }
+        return "not deleted :'(";
+    }
+
+    public String deleteEmailInFolder() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray folder = (JSONArray) obj.get("userFolders");
+                for (int k = 0; k < folder.size(); k++) {
+                    JSONObject tmp = (JSONObject) folder.get(k);
+                    if (tmp.get(folderName) != null) {
+                        JSONArray arrEmail = (JSONArray) tmp.get(folderName);
+                        for (int j = 0; j < arrEmail.size(); j++) {
+                            JSONObject obj2 = (JSONObject) arrEmail.get(j);
+                            if (obj2.get("id").equals(mailId)) {
+                                arrEmail.remove(obj2);
+                                updateIDs(arrEmail);
+                                updateJSON(usersArray);
+                                addJSONEamilToUser(obj2, userId, "trash");
+                                return "Deleted successfully! :D";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return "not deleted :'(";
+        
+    }
+
+    private void updateIDs(JSONArray folder) {
+        for (int i = 0; i < folder.size(); i++) {
+            JSONObject tmp = (JSONObject) folder.get(i);
+            tmp.put("id", i + 1);
+        }
     }
 }
