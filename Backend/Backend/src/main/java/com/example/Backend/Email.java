@@ -1,27 +1,21 @@
 package com.example.Backend;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.simple.JSONArray;
 
+<<<<<<< HEAD
 import org.json.simple.JSONArray;
 
 public class Email{
+=======
+class Email {
+>>>>>>> 0f698bffd33e50f743169f1f206e3b974f094dcd
     private String sender;
     private String receiver;
     private String date;
     private String importance;
     private String subject;
     private boolean attachment;
-    private List<Attachment> attachments;
-	private String text;
-	
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
-	}
-
+    private JSONArray attachments;
 	public String getSender() {
 		return sender;
 	}
@@ -58,8 +52,11 @@ public class Email{
 	public void setAttachment(boolean attachment) {
 		this.attachment = attachment;
 	}
+	public JSONArray getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(JSONArray attachments) {
+		this.attachments = attachments;
+	}
 
-    public List<Attachment> getAttachments() {
-        return attachments;
-    }
 }
