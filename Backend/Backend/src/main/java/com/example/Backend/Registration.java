@@ -1,22 +1,31 @@
 package com.example.Backend;
 
-import java.util.List;
+import org.json.simple.JSONArray;
+
+
 
 public class Registration {
     private Long id;
     private String username;
     private String email;
     private String password;
-    private List<Email> inbox;
-    private List<Email> draft;
-    private List<Email> sent;
-    private List<Email> trash;
-    private List<Registration> contacts;
+    private JSONArray inbox;
+    private JSONArray draft;
+    private JSONArray sent;
+    private JSONArray trash;
+    private JSONArray contacts;
+    private JSONArray userFolders;
     public Registration(){
+        this.inbox = new JSONArray();  
+        this.draft = new JSONArray();  
+        this.sent = new JSONArray();  
+        this.trash = new JSONArray();
+        this.userFolders = new JSONArray();
+        this.contacts = new JSONArray();
     	
     }
 
-    public List<Email> getEmails(String emailType) {
+    public JSONArray getEmails(String emailType) {
     	switch(emailType)
     	{
     	case "inbox":
@@ -27,17 +36,24 @@ public class Registration {
     		return sent;
 		case"trash":
     		return trash;
+		case"userFolders":
+    		return userFolders;
 		default:
     			return null;
     	}
 	}
 
-	public Registration(Long id, String username, String email, String password) {
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-	}
+    public Registration(Long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.inbox = new JSONArray();  
+        this.draft = new JSONArray();  
+        this.sent = new JSONArray();  
+        this.trash = new JSONArray();
+        this.userFolders = new JSONArray();
+    }
 	public Long getId() {
 		return id;
 	}
@@ -64,53 +80,61 @@ public class Registration {
 	}
 
 
-	public List<Email> getInbox() {
+	public JSONArray getInbox() {
 		return inbox;
 	}
 
 
-	public void setInbox(List<Email> inbox) {
+	public void setInbox(JSONArray inbox) {
 		this.inbox = inbox;
 	}
 
 
-	public List<Email> getDraft() {
+	public JSONArray getDraft() {
 		return draft;
 	}
 
 
-	public void setDraft(List<Email> draft) {
+	public void setDraft(JSONArray draft) {
 		this.draft = draft;
 	}
 
 
-	public List<Email> getSent() {
+	public JSONArray getSent() {
 		return sent;
 	}
 
 
-	public void setSent(List<Email> sent) {
+	public void setSent(JSONArray sent) {
 		this.sent = sent;
 	}
 
 
-	public List<Email> getTrash() {
+	public JSONArray getTrash() {
 		return trash;
 	}
 
 
-	public void setTrash(List<Email> trash) {
+	public void setTrash(JSONArray trash) {
 		this.trash = trash;
 	}
 
 
-	public List<Registration> getContacts() {
+	public JSONArray getContacts() {
 		return contacts;
 	}
 
 
-	public void setContacts(List<Registration> contacts) {
+	public void setContacts(JSONArray contacts) {
 		this.contacts = contacts;
+	}
+
+	public JSONArray getUserFolders() {
+		return userFolders;
+	}
+
+	public void setUserFolders(JSONArray userFolders) {
+		this.userFolders = userFolders;
 	}
 
 
