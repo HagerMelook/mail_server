@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.json.simple.JSONArray;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -19,23 +22,28 @@ public class SortingController {
     private static final String JsonFile = "users.json";
 
 
-    @PostMapping(path = "/sort")
+	@PostMapping(path = "/sort")
     public ResponseEntity<List<Email>> sortEmails(@RequestBody Request request) {
         try {
             List<Registration> users = readUsersFromJson();
 
             // Find the user by ID
             Registration user = findUserById(users, request.getUserId());
-
             if (user != null) {
   
-            	List<Email> userEmails = user.getEmails(request.getEmailType());
+            	JSONArray json = user.getEmails("inbox");
+     
+            	String arr = json.toString(); 
+            	ObjectMapper objectMapper = new ObjectMapper();
+            	List<Email> userEmails = objectMapper.readValue(arr, new TypeReference<List<Email>>() {});
+
+
                 // Determine the sorting strategy based on the request
                 SortingStrategy strategy = getSortingStrategy(request.getSortingKeyword());
 
                 // Use the Context class with the specified strategy
                 EmailSorterContext sorterContext = new EmailSorterContext(strategy);
-                sorterContext.sortEmails(user.getEmails(request.getEmailType()));
+                sorterContext.sortEmails(userEmails);
 
 
                 return ResponseEntity.ok(userEmails);
