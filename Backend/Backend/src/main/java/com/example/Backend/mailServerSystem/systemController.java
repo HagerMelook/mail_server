@@ -10,6 +10,7 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteEmailInFo
 import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.delete;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.getAllUserFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.inbox;
@@ -67,6 +68,14 @@ public class systemController {
         mailServerButtons contact = userMail.getButton(userId);
         contact getContact = new contact(contact);
         mailButton onPressed = new mailButton(getContact);
+        return onPressed.press();
+    }
+
+    @GetMapping("{id}/userFolders")
+    public String userFolders(@PathVariable("id") Long userId) {
+        mailServerButtons folders = userMail.getButton(userId);
+        getAllUserFolders getFolders = new getAllUserFolders(folders);
+        mailButton onPressed = new mailButton(getFolders);
         return onPressed.press();
     }
 

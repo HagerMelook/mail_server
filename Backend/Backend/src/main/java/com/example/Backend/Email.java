@@ -3,6 +3,8 @@ package com.example.Backend;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 public class Email{
     private String sender;
     private String receiver;

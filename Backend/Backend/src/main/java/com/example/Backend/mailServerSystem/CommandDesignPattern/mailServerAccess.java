@@ -6,9 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.cglib.core.Local;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -92,6 +95,12 @@ public class mailServerAccess implements mailServerButtons {
             JSONObject obj = (JSONObject) usersArray.get(i);
             if (obj.get("id").equals(userId)) {
                 JSONArray Mails = (JSONArray) obj.get(folderName);
+                if (folderName.equals("trash")) {
+                    this.folderName = "trash";
+                    deleteAfter30Days(Mails);
+                    obj = (JSONObject) usersArray.get(i);
+                    Mails = (JSONArray)obj.get(folderName);
+                }
                 return Mails.toJSONString();
             }
         }
@@ -175,6 +184,7 @@ public class mailServerAccess implements mailServerButtons {
                         folder.remove(tmp);
                         updateIDs(folder);
                         updateJSON(usersArray);
+                        setDateOfDelete(tmp);
                         if (!folderName.equals("trash"))
                             addJSONEamilToUser(tmp, userId, "trash");
                         return "Deleted successfully! :D";
@@ -196,6 +206,7 @@ public class mailServerAccess implements mailServerButtons {
                     if (tmp.get(folderName) != null) {
                         folder.remove(tmp);
                         updateJSON(usersArray);
+                        setDateOfDelete(tmp);
                         addJSONEamilToUser(tmp, userId, "trash");
                         return "Deleted successfully! :D";
                     }
@@ -221,6 +232,7 @@ public class mailServerAccess implements mailServerButtons {
                                 arrEmail.remove(obj2);
                                 updateIDs(arrEmail);
                                 updateJSON(usersArray);
+                                setDateOfDelete(obj2);
                                 addJSONEamilToUser(obj2, userId, "trash");
                                 return "Deleted successfully! :D";
                             }
@@ -230,7 +242,7 @@ public class mailServerAccess implements mailServerButtons {
             }
         }
         return "not deleted :'(";
-        
+
     }
 
     private void updateIDs(JSONArray folder) {
@@ -239,4 +251,25 @@ public class mailServerAccess implements mailServerButtons {
             tmp.put("id", i + 1);
         }
     }
+
+    private void setDateOfDelete(JSONObject obj) {
+        LocalDate date = LocalDate.now();
+        obj.put("deletionDate", date.plusDays(30).toString());
+    }
+
+
+    private void deleteAfter30Days(JSONArray trash) {
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < trash.size(); i++) {
+            JSONObject obj = (JSONObject) trash.get(i);
+            if (today.isAfter(LocalDate.parse((String)obj.get("deletionDate")))) {
+                trash.remove(obj);
+                i--;
+                System.out.println(trash);
+            }
+        }
+        updateIDs(trash);
+        updateJSON(usersArray);
+    }
+
 }

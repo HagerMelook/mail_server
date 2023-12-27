@@ -19,13 +19,15 @@ public class MailSender {
         array = obj.readJSONSystem();
         for(int i = 0; i < array.size(); i++){
             JSONObject obj = (JSONObject)array.get(i);
-            if(obj.get("email").equals(sendee)){
+            // for(int k = 0; k < sendee.size(); k++){
+                if(obj.get("email").equals(sendee)){
                 JSONArray folder = (JSONArray)obj.get("inbox");
                 email.put("id", folder.size() + 1);
                 folder.add(email);
-                //obj.put(folderName, folder);
                 break;
             }
+            // }
+           
         }
        obj.updateJSON(array);
     }
