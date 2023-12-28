@@ -10,4 +10,7 @@ public class userMail{
     public static mailServerButtons userFolders(Long idU, String folderName){
         return new mailServerAccess(idU,folderName);
     }
+    public static mailServerButtons move(Long idU, Long i, String to, String from) {
+        return new mailServerAccess(idU,to, from, i);
+    }
 }

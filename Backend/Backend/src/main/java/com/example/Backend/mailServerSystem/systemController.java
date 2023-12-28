@@ -22,6 +22,7 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userName;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.move;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.Contact;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.ContactCreatorFacade;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.MailCreatorFacade;
@@ -143,12 +144,24 @@ public class systemController {
         contact.create();
     }
 
+    @PostMapping("{id}/{sourceFolder}/move/{destionation}/{idE}")
+    public void move(@PathVariable("sourceFolder") String from, @PathVariable("idE") Long idE,
+            @PathVariable("destionation") String to, @PathVariable("id") Long idU) {
+        // Queue<Long> ids = idQ.getIds();
+        // for (Long i : ids) {
+            mailServerButtons emails = userMail.move(idU, idE, to, from);
+            move theFolder = new move(emails);
+            mailButton onPressed = new mailButton(theFolder);
+            onPressed.press();
+        // }
+    }
+
     @DeleteMapping("{idU}/{folder}/delete")
-    public void deleteMail(@RequestBody Queue<Long> idQ, @PathVariable("folder") String folderName,
+    public void deleteMail(@RequestBody Email idQ, @PathVariable("folder") String folderName,
             @PathVariable("idU") Long idU) {
-        while (!idQ.isEmpty()) {
-            System.out.println(idQ.size());
-            mailServerButtons delete = userMail.getMail(idQ.remove(), folderName, idU);
+        Queue<Long> ids = idQ.getIds();
+        for (Long i : ids) {
+            mailServerButtons delete = userMail.getMail(i, folderName, idU);
             delete deleteMail = new delete(delete);
             mailButton onPressed = new mailButton(deleteMail);
             onPressed.press();
@@ -164,10 +177,11 @@ public class systemController {
     }
 
     @DeleteMapping("{idU}/userFolders/{folderName}/deleteEmail")
-    public void deleteMailInFolder(@RequestBody Queue<Long> idQ, @PathVariable("folderName") String folderName,
+    public void deleteMailInFolder(@RequestBody Email idQ, @PathVariable("folderName") String folderName,
             @PathVariable("idU") Long idU) {
-        while (!idQ.isEmpty()) {
-            mailServerButtons delete = userMail.getMail(idQ.remove(), folderName, idU);
+        Queue<Long> ids = idQ.getIds();
+        for (Long i : ids) {
+            mailServerButtons delete = userMail.getMail(i, folderName, idU);
             DeleteEmailInFolder deleteMail = new DeleteEmailInFolder(delete);
             mailButton onPressed = new mailButton(deleteMail);
             onPressed.press();

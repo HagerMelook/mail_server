@@ -6,6 +6,6 @@ public class ReceiverSortingStrategy implements SortingStrategy {
 
     @Override
     public void sort(List<Email> emails) {
-    	 emails.sort(Comparator.comparing(Email::getReceiver));
+    	//  emails.sort(Comparator.comparing(Email::getReceiver));
     }
 }

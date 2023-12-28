@@ -1,6 +1,5 @@
 package com.example.Backend.mailServerSystem.CommandDesignPattern;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public interface mailServerButtons {
@@ -13,4 +12,5 @@ public interface mailServerButtons {
     public String deleteFolder();
     public String deleteEmailInFolder();
     public String getUserName();
+    public String moveEmail();
 }

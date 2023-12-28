@@ -19,5 +19,4 @@ public class userFoldersClass {
         this.emails = emails;
     }
     
-    
 }

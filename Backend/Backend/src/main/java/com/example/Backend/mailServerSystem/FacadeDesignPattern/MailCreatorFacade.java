@@ -1,6 +1,5 @@
 package com.example.Backend.mailServerSystem.FacadeDesignPattern;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.example.Backend.Email;
@@ -27,16 +26,18 @@ public class MailCreatorFacade {
         access = new mailServerAccess();
 
         sender = new MailSender(this.mail.getReceiver());
-        //attachment = new attachment(this.mail.getAttachments(), this.mail.hasAttachments());
+        if(this.mail.hasAttachments())
+            attachment = new attachment(this.mail.hasAttachments());
         body = new MailBody(this.mail.getText());
-        header = new MailHeader(this.mail.getReceiver(), this.mail.getSender(), this.mail.getSubject(), this.mail.getDate(),
+        header = new MailHeader(this.mail.getReceiver() ,this.mail.getSender(), this.mail.getSubject(), this.mail.getDate(),
                 this.mail.getImportance());
     }
 
     public void create(){
         JSONObject obj = header.getHeader();
         obj = body.getBody(obj);
-        //obj = attachment.getAttachement(obj);
+        if(mail.hasAttachments())
+            obj = attachment.getAttachement(obj);
         obj = access.setDate(obj,true);
         if(folderName.equals("sent"))
             sender.send(obj);

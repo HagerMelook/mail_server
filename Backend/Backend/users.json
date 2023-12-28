@@ -16,10 +16,70 @@
                 "subject": "test",
                 "text": "keep it up!",
                 "id": 1
+            },
+            {
+                "date": "2023-12-28",
+                "attachments": [
+                    {
+                        "fileName": "getFolder.java",
+                        "fileSize": 331
+                    },
+                    {
+                        "fileName": "Lecture 11 - Non-Linear Equations (Part 1 - Bracketing Methods).pdf",
+                        "fileSize": 1998205
+                    },
+                    {
+                        "fileName": "(ELE414) Microprocessors - Machine Codes and Addressing Modes - Hacettepe University.pdf",
+                        "fileSize": 584975
+                    },
+                    {
+                        "fileName": "80C186EC Microprocessor User�\u20AC�s Manual.pdf",
+                        "fileSize": 5097660
+                    },
+                    {
+                        "fileName": "Lecture 13 - Non-Linear Equations (Part 3 - Open Methods - Part 2).pdf",
+                        "fileSize": 2038750
+                    },
+                    {
+                        "fileName": "412881687_7002991866458917_5298010498633134898_n.jpg",
+                        "fileSize": 67955
+                    },
+                    {
+                        "fileName": "Lecture 8 - Intro to Intel 8086 Microprocessor.pdf",
+                        "fileSize": 2241111
+                    },
+                    {
+                        "fileName": "WhatsApp Video 2023-12-21 at 09.48.37 (1).mp4",
+                        "fileSize": 51637736
+                    },
+                    {
+                        "fileName": "121703-003_ASM86_Language_Reference_Manual_Nov83.pdf",
+                        "fileSize": 12706586
+                    },
+                    {
+                        "fileName": "Lecture 8 - Intro to Intel 8086 Microprocessor.pdf",
+                        "fileSize": 2241111
+                    }
+                ],
+                "receiver": "user2@example.com",
+                "attachment": true,
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "keep it up!",
+                "id": 2
             }
         ],
         "id": 1,
-        "inbox": [],
+        "inbox": [{
+            "date": "2020-12-20",
+            "receiver": "user2@example.com",
+            "sender": "user1@example.com",
+            "importance": "high",
+            "subject": "test",
+            "text": "move",
+            "id": 1
+        }],
         "sent": [
             {
                 "date": "2020-12-20",
@@ -38,10 +98,48 @@
                 "subject": "test",
                 "text": "keep it up!",
                 "id": 2
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 3
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [
+                    "user3@example.com"
+                ],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 4
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [
+                    "user2@example.com",
+                    "user3@example.com"
+                ],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 5
             }
         ],
         "email": "user1@example.com",
-        "contacts": [],
+        "contacts": [
+            {
+                "name": "rana",
+                "id": 1,
+                "email": "rana@example.com"
+            }
+        ],
         "username": "user1",
         "trash": [
             {
@@ -69,6 +167,12 @@
                 "deletionDate": "2024-01-27",
                 "name": "test",
                 "id": 3
+            },
+            {
+                "deletionDate": "2024-01-27",
+                "name": "nouran",
+                "id": 4,
+                "email": "nouran@example.com"
             }
         ]
     },
@@ -95,11 +199,54 @@
                 "subject": "test",
                 "text": "keep it up!",
                 "id": 2
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 3
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [
+                    "user3@example.com"
+                ],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 4
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": [
+                    "user2@example.com",
+                    "user3@example.com"
+                ],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 1
             }
         ],
         "sent": [],
         "email": "user2@example.com",
-        "contacts": [],
+        "contacts": [
+            {
+                "name": "nouran",
+                "id": 1,
+                "email": "nouran@example.com"
+            },
+            {
+                "name": "rana",
+                "id": 2,
+                "email": "rana@example.com"
+            }
+        ],
         "username": "user2",
         "trash": []
     },
@@ -108,7 +255,20 @@
         "userFolders": [],
         "draft": [],
         "id": 3,
-        "inbox": [],
+        "inbox": [
+            {
+                "date": "2023-12-28",
+                "receiver": [
+                    "user2@example.com",
+                    "user3@example.com"
+                ],
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "cool",
+                "id": 1
+            }
+        ],
         "sent": [],
         "email": "user3@example.com",
         "contacts": [],

@@ -1,5 +1,7 @@
 package com.example.Backend;
 
+import java.util.Queue;
+
 import org.json.simple.JSONArray;
 
 
@@ -10,14 +12,23 @@ import org.json.simple.JSONArray;
 public class Email {
 
     private String sender;
-    private String receiver;
+    private Queue<String> receiver;
     private String date;
     private String importance;
     private String subject;
     private boolean attachment;
-    private JSONArray attachments;
 	private String text;
-
+	private Queue<Long> ids;
+	
+	public Queue<Long> getIds() {
+		return ids;
+	}
+	public void setIds(Queue<Long> ids) {
+		this.ids = ids;
+	}
+	public void setReceiver(Queue<String> receiver) {
+		this.receiver = receiver;
+	}
 	public boolean isAttachment() {
 		return attachment;
 	}
@@ -32,12 +43,6 @@ public class Email {
 	}
 	public void setSender(String sender) {
 		this.sender = sender;
-	}
-	public String getReceiver() {
-		return receiver;
-	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
 	}
 	public String getDate() {
 		return date;
@@ -63,11 +68,8 @@ public class Email {
 	public void setAttachment(boolean attachment) {
 		this.attachment = attachment;
 	}
-	public JSONArray getAttachments() {
-		return attachments;
-	}
-	public void setAttachments(JSONArray attachments) {
-		this.attachments = attachments;
+	public Queue<String> getReceiver() {
+		return receiver;
 	}
 
 }

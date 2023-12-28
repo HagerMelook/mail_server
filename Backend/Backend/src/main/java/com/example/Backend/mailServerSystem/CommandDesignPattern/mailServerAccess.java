@@ -21,6 +21,7 @@ public class mailServerAccess implements mailServerButtons {
     private Long userId;
     private Long mailId;
     private String folderName;
+    private String dest;
 
     public mailServerAccess() {
     }
@@ -38,6 +39,13 @@ public class mailServerAccess implements mailServerButtons {
 
     public mailServerAccess(Long userId) {
         this.userId = userId;
+    }
+
+    public mailServerAccess(Long idU, String to, String from, Long i) {
+        this.dest = to;
+        this.mailId = i;
+        this.folderName = from;
+        this.userId = idU;
     }
 
     private void setUsersArray() {
@@ -285,6 +293,24 @@ public class mailServerAccess implements mailServerButtons {
         updateJSON(usersArray);
     }
 
-   
+    public String moveEmail() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+                JSONArray folder = (JSONArray) obj.get("userFolders");
+                for (int k = 0; k < folder.size(); k++) {
+                    JSONObject tmp = (JSONObject) folder.get(k);
+                    if (tmp.get("name").equals(dest)){
+                        JSONArray arrEmail = (JSONArray) tmp.get("emails");
+                        arrEmail.add(getMail());
+                        deleteEmail();
+                        return "Moved successfully! :D";
+                        }
+                    }
+                }
+            } return null;
+        }
+       
+    }   
 
-}
