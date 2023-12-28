@@ -10,6 +10,7 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteEmailInFo
 import com.example.Backend.mailServerSystem.CommandDesignPattern.DeleteFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.contact;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.delete;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.draft;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getAllUserFolders;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getFolder;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.getTheMail;
@@ -20,16 +21,29 @@ import com.example.Backend.mailServerSystem.CommandDesignPattern.mailServerButto
 import com.example.Backend.mailServerSystem.CommandDesignPattern.sent;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.trash;
 import com.example.Backend.mailServerSystem.CommandDesignPattern.userMail;
+import com.example.Backend.mailServerSystem.CommandDesignPattern.userName;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.Contact;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.ContactCreatorFacade;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.MailCreatorFacade;
 import com.example.Backend.mailServerSystem.FacadeDesignPattern.createUserFolderFacade;
 
+import java.util.Queue;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@CrossOrigin
 @RestController
 public class systemController {
+
+    @GetMapping("{id}")
+    public String user(@PathVariable("id") Long userId) {
+        mailServerButtons user = userMail.getButton(userId);
+        userName name = new userName(user);
+        mailButton onPressed = new mailButton(name);
+        return onPressed.press();
+    }
 
     @GetMapping("{id}/inbox")
     public String inbox(@PathVariable("id") Long userId) {
@@ -50,7 +64,7 @@ public class systemController {
     @GetMapping("{id}/draft")
     public String draft(@PathVariable("id") Long userId) {
         mailServerButtons mail = userMail.getButton(userId);
-        inbox getDraft = new inbox(mail);
+        draft getDraft = new draft(mail);
         mailButton onPressed = new mailButton(getDraft);
         return onPressed.press();
     }
@@ -129,13 +143,18 @@ public class systemController {
         contact.create();
     }
 
-    @DeleteMapping("{idU}/{folder}/{idE}/delete")
-    public String deleteMail(@PathVariable("idE") Long idE ,@PathVariable("folder") String folderName, @PathVariable("idU") Long idU) {
-        mailServerButtons delete = userMail.getMail(idE, folderName, idU);
-        delete deleteMail = new delete(delete);
-        mailButton onPressed = new mailButton(deleteMail);
-        return onPressed.press();
+    @DeleteMapping("{idU}/{folder}/delete")
+    public void deleteMail(@RequestBody Queue<Long> idQ, @PathVariable("folder") String folderName,
+            @PathVariable("idU") Long idU) {
+        while (!idQ.isEmpty()) {
+            System.out.println(idQ.size());
+            mailServerButtons delete = userMail.getMail(idQ.remove(), folderName, idU);
+            delete deleteMail = new delete(delete);
+            mailButton onPressed = new mailButton(deleteMail);
+            onPressed.press();
+        }
     }
+
     @DeleteMapping("{idU}/userFolders/{folderName}/delete")
     public String deleteFolder(@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
         mailServerButtons delete = userMail.userFolders(idU, folderName);
@@ -144,14 +163,17 @@ public class systemController {
         return onPressed.press();
     }
 
-    @DeleteMapping("{idU}/userFolders/{folderName}/{emailId}/delete")
-    public String deleteMailInFolder(@PathVariable("emailId") Long idE ,@PathVariable("folderName") String folderName, @PathVariable("idU") Long idU) {
-        mailServerButtons delete = userMail.getMail(idE, folderName, idU);
-        DeleteEmailInFolder deleteMail = new DeleteEmailInFolder(delete);
-        mailButton onPressed = new mailButton(deleteMail);
-        return onPressed.press();
+    @DeleteMapping("{idU}/userFolders/{folderName}/deleteEmail")
+    public void deleteMailInFolder(@RequestBody Queue<Long> idQ, @PathVariable("folderName") String folderName,
+            @PathVariable("idU") Long idU) {
+        while (!idQ.isEmpty()) {
+            mailServerButtons delete = userMail.getMail(idQ.remove(), folderName, idU);
+            DeleteEmailInFolder deleteMail = new DeleteEmailInFolder(delete);
+            mailButton onPressed = new mailButton(deleteMail);
+            onPressed.press();
+        }
     }
-    
+
     // @GetMapping("{username}/userFolders")
     // public JSONObject userFolders(@PathVariable("username") String username) {
     // return userFolders(username);

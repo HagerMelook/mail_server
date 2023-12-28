@@ -12,4 +12,5 @@ public interface mailServerButtons {
     public String deleteEmail();
     public String deleteFolder();
     public String deleteEmailInFolder();
+    public String getUserName();
 }

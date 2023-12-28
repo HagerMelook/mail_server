@@ -89,6 +89,16 @@ public class mailServerAccess implements mailServerButtons {
         }
     }
 
+    public String getUserName() {
+        setUsersArray();
+        for (int i = 0; i < usersArray.size(); i++) {
+            JSONObject obj = (JSONObject) usersArray.get(i);
+            if (obj.get("id").equals(userId)) {
+               return (String)obj.get("username");
+            }
+        }
+        return null;
+    }
     public String getData(String folderName) {
         setUsersArray();
         for (int i = 0; i < usersArray.size(); i++) {
@@ -181,7 +191,7 @@ public class mailServerAccess implements mailServerButtons {
                         folder.remove(tmp);
                         updateIDs(folder);
                         updateJSON(usersArray);
-                        setDateOfDelete(tmp);
+                        setDate(tmp,false);
                         if (!folderName.equals("trash"))
                             addJSONEamilToUser(tmp, userId, "trash");
                         return "Deleted successfully! :D";
@@ -200,10 +210,10 @@ public class mailServerAccess implements mailServerButtons {
                 JSONArray folder = (JSONArray) obj.get("userFolders");
                 for (int k = 0; k < folder.size(); k++) {
                     JSONObject tmp = (JSONObject) folder.get(k);
-                    if (tmp.get(folderName) != null) {
+                    if (tmp.get("name").equals(folderName)) {
                         folder.remove(tmp);
                         updateJSON(usersArray);
-                        setDateOfDelete(tmp);
+                        setDate(tmp,false);
                         addJSONEamilToUser(tmp, userId, "trash");
                         return "Deleted successfully! :D";
                     }
@@ -221,15 +231,15 @@ public class mailServerAccess implements mailServerButtons {
                 JSONArray folder = (JSONArray) obj.get("userFolders");
                 for (int k = 0; k < folder.size(); k++) {
                     JSONObject tmp = (JSONObject) folder.get(k);
-                    if (tmp.get(folderName) != null) {
-                        JSONArray arrEmail = (JSONArray) tmp.get(folderName);
+                    if (tmp.get("name").equals(folderName)) {
+                        JSONArray arrEmail = (JSONArray) tmp.get("emails");
                         for (int j = 0; j < arrEmail.size(); j++) {
                             JSONObject obj2 = (JSONObject) arrEmail.get(j);
                             if (obj2.get("id").equals(mailId)) {
                                 arrEmail.remove(obj2);
                                 updateIDs(arrEmail);
                                 updateJSON(usersArray);
-                                setDateOfDelete(obj2);
+                                setDate(obj2,false);
                                 addJSONEamilToUser(obj2, userId, "trash");
                                 return "Deleted successfully! :D";
                             }
@@ -249,9 +259,15 @@ public class mailServerAccess implements mailServerButtons {
         }
     }
 
-    private void setDateOfDelete(JSONObject obj) {
+    public JSONObject setDate(JSONObject obj, boolean isCreation) {
         LocalDate date = LocalDate.now();
+        if(isCreation)
+        {
+            obj.put("date", date.toString());
+            return obj;
+        }
         obj.put("deletionDate", date.plusDays(30).toString());
+        return obj;
     }
 
 
@@ -268,5 +284,7 @@ public class mailServerAccess implements mailServerButtons {
         updateIDs(trash);
         updateJSON(usersArray);
     }
+
+   
 
 }

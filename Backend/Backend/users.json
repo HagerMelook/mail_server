@@ -3,23 +3,21 @@
         "password": "password1",
         "userFolders": [
             {
-                "emails": [ {
-                    "date": "2020-12-20",
-                    "receiver": "user2@example.com",
-                    "sender": "user1@example.com",
-                    "importance": "high",
-                    "subject": "test",
-                    "text": "we are testing :)",
-                    "id": 1
-                }],
-                "name": "test"
-            },
-            {
                 "emails": [],
                 "name": "csed2026"
             }
         ],
-        "draft": [],
+        "draft": [
+            {
+                "date": "2023-12-28",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "keep it up!",
+                "id": 1
+            }
+        ],
         "id": 1,
         "inbox": [],
         "sent": [
@@ -31,6 +29,15 @@
                 "subject": "test",
                 "text": "we are testing :)",
                 "id": 1
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "keep it up!",
+                "id": 2
             }
         ],
         "email": "user1@example.com",
@@ -38,14 +45,30 @@
         "username": "user1",
         "trash": [
             {
-                "date": "2020-12-20",
+                "date": "2020-12-2",
                 "receiver": "user2@example.com",
                 "sender": "user1@example.com",
-                "deletionDate": "2024-01-26",
+                "deletionDate": "2024-01-27",
                 "importance": "high",
                 "subject": "test",
                 "text": "we are testing :)",
                 "id": 1
+            },
+            {
+                "date": "2020-12-1",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "deletionDate": "2024-01-27",
+                "importance": "high",
+                "subject": "test",
+                "text": "we are testing :)",
+                "id": 2
+            },
+            {
+                "emails": [],
+                "deletionDate": "2024-01-27",
+                "name": "test",
+                "id": 3
             }
         ]
     },
@@ -63,6 +86,15 @@
                 "subject": "test",
                 "text": "we are testing :)",
                 "id": 1
+            },
+            {
+                "date": "2023-12-28",
+                "receiver": "user2@example.com",
+                "sender": "user1@example.com",
+                "importance": "high",
+                "subject": "test",
+                "text": "keep it up!",
+                "id": 2
             }
         ],
         "sent": [],

@@ -27,7 +27,7 @@ public class MailCreatorFacade {
         access = new mailServerAccess();
 
         sender = new MailSender(this.mail.getReceiver());
-        attachment = new attachment(this.mail.getAttachments(), this.mail.hasAttachments());
+        //attachment = new attachment(this.mail.getAttachments(), this.mail.hasAttachments());
         body = new MailBody(this.mail.getText());
         header = new MailHeader(this.mail.getReceiver(), this.mail.getSender(), this.mail.getSubject(), this.mail.getDate(),
                 this.mail.getImportance());
@@ -37,6 +37,7 @@ public class MailCreatorFacade {
         JSONObject obj = header.getHeader();
         obj = body.getBody(obj);
         //obj = attachment.getAttachement(obj);
+        obj = access.setDate(obj,true);
         if(folderName.equals("sent"))
             sender.send(obj);
         access.addJSONEamilToUser(obj, userId, folderName);
