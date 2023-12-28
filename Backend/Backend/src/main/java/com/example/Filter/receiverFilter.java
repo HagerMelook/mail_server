@@ -8,10 +8,10 @@ public class receiverFilter implements Filter{
     @Override
     public HashMap<String,ArrayList<Email>> emailFilter(ArrayList<Email> emails) {
         for(Email email: emails){
-            if(!receiverEmailFilter.containsKey(email.getReceivername())){
-                receiverEmailFilter.put(email.getReceivername(),new ArrayList<Email>());
+            if(!receiverEmailFilter.containsKey(email.getReceiver())){
+                receiverEmailFilter.put(email.getReceiver(),new ArrayList<Email>());
             }
-            receiverEmailFilter.get(email.getReceivername()).add(email);
+            receiverEmailFilter.get(email.getReceiver()).add(email);
         }
         return receiverEmailFilter;
     }

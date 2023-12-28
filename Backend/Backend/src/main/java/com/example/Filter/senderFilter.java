@@ -9,10 +9,10 @@ public class senderFilter implements Filter{
     @Override
     public HashMap <String,ArrayList<Email>> emailFilter(ArrayList <Email> emails) {
         for(Email email: emails){
-            if(!senderEmailFilter.containsKey(email.getSendername())){
-                senderEmailFilter.put(email.getSendername(),new ArrayList<Email>());
+            if(!senderEmailFilter.containsKey(email.getSender())){
+                senderEmailFilter.put(email.getSender(),new ArrayList<Email>());
             }
-            senderEmailFilter.get(email.getSendername()).add(email);
+            senderEmailFilter.get(email.getSender()).add(email);
         }
         return senderEmailFilter;
     }
